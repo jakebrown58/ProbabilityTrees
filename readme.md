@@ -37,7 +37,7 @@ This would be hundreds of lines of incomprehensible code if written procedurally
 
 Not only is this far more readable, it's not code - it's data.  It can be changed at runtime.  It's not static, and can be modified for special characteristics of players, like a quarterback who is especially agile.
 
-elusiveQB = {
+	elusiveQB = {
 		sack: -4,
 		qbScramble: 2,
 		runningPass: 5,
@@ -52,54 +52,56 @@ Ultimately it's good to hook into an evaluation engine that knows what to do wit
 API:
 
 ProbabilityResolver.resolve(object)
-- always returns a string of the 1st leaf key it finds.
-- randomly by numeric weight picks a key from 'first'
-- if that key is also a key of object, it'll do it again on that key.
-- if that key isn't a top-level key, it just returns it.
+* always returns a string of the 1st leaf key it finds.
+* randomly by numeric weight picks a key from 'first'
+* if that key is also a key of object, it'll do it again on that key.
+* if that key isn't a top-level key, it just returns it.
 
 Convert code like this:
 
-var value = '';
-x = _.rand(0, 100);
-
-if( x < 5 ) {
-    value = 'a';
-} else if ( x < 10 ) {
-    return 'b';
-} else {
-    return 'c';
-}
-
-if( value ==== 'a' ) {
-    x = _.rand(0,10);
-    if(x<5) {
-        return 'b';
-    } else {
-        return 'd';
-    }
-}
+	var value = '';
+	x = _.rand(0, 100);
+	
+	if( x < 5 ) {
+	    value = 'a';
+	} else if ( x < 10 ) {
+	    return 'b';
+	} else {
+	    return 'c';
+	}
+	
+	if( value ==== 'a' ) {
+	    x = _.rand(0,10);
+	    if(x<5) {
+	        return 'b';
+	    } else {
+	        return 'd';
+	    }
+	}
 
 To this:
 
-var obj = {
-    first: {a: 5, b: 5, c: 90},
-    a: {b: 5, d: 5}
-};
-return new ProbabilityResolver().resolve(obj);
+	var obj = {
+	    first: {a: 5, b: 5, c: 90},
+	    a: {b: 5, d: 5}
+	};
+	return new ProbabilityResolver().resolve(obj);
 
 
 -------------------------
 
 ProabilityResolver.modify(base, mod)
-- recursively applies changes to the weights of keys in mod.
-- to change a top level key, use the key's name with an '_' at the end.
+* recursively applies changes to the weights of keys in mod.
+* to change a top level key, use the key's name with an '_' at the end.
 
-var obj = {
-    first: {a: 4, b: 5},
-    a: {b:5, c: 5}},
-    mod = { a: 4, a_: {c: 5}};
-ProbabilityResolver.modify(obj, mod);
+
+	var obj = {
+	    first: {a: 4, b: 5},
+	    a: {b:5, c: 5}},
+	    mod = { a: 4, a_: {c: 5}};
+	ProbabilityResolver.modify(obj, mod);
 
 afterwards, obj will be:
-    {first: {a: 8, b: 5},
-    a: {c:5}}
+
+	    {first: {a: 8, b: 5},
+	    a: {c:5}}
