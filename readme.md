@@ -2,8 +2,8 @@
 
 This is a micro-library to provide an easier way to handle runtime changes to randomized logic for games of chance.
 
-* Makes your probability tables data-driven rather than code-driven, so that you can change probabilities as you play-test without changing code.
-* Makes your probability logic readable - so you can raipidly get a sense of the likely hood of an action.
+* Makes your probability tables data-driven rather than code-driven, so that you can change probabilities as you play test without changing code.
+* Makes your probability logic readable - so you can raipidly get a sense of the likelyhood of an action.
 * Allows for tremendous increase in richness with conditional probibilities that would be prohibitivly confusing with a if/else driven approach.
 * Gets rid of pesky off by one errors in probability logic.
 
